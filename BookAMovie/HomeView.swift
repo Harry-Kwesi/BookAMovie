@@ -36,12 +36,68 @@ struct HomeView: View {
                             .foregroundColor(.white)
                 
                 ZStack{
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.white.opacity(0.2))
+                        .padding(.horizontal)
+                        .offset(y:12)
+                    
                     Image("poster")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: getRect().width/1.5, height: getRect().height/2, alignment: .center)
                         .cornerRadius(15)
                 }
+                .frame(width: getRect().width/1.5, height: getRect().height/2, alignment: .center)
+                .padding(.top, 20)
+                
+                VStack(alignment: .leading, spacing: 15, content: {
+                    Text("The Dark Knight")
+                        .font(.title2)
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.white)
+                    
+                    Text("Director: Christopher Nolan")
+                        .foregroundColor(.white)
+                        .overlay(
+                        
+                             Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                                .offset(x: 35, y: -2)
+                             ,
+                             alignment: .trailing
+                        )
+                    
+                    LazyVGrid(columns:
+                                [GridItem(.adaptive(minimum: 80))],alignment: .leading, content: {
+                      
+                        ForEach(genre, id: \.self){genreText in
+                            
+                            Text(genreText)
+                                .font(.caption)
+                                .padding(.vertical,10)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.white)
+                                .background(Color.white.opacity(0.08))
+                                .clipShape(Capsule())
+                        }
+                        
+                    })
+                    .padding(.top, 20)
+                    
+                    Text("Synopsis")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                    
+                    Text(synopsis)
+                        .foregroundColor(.white)
+                    
+                })
+                .padding(.top,55)
+                .padding(.horizontal)
+                .padding(.leading,10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
             })
 
         })
